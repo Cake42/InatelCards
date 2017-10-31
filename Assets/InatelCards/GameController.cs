@@ -4,20 +4,70 @@
 
 	public class GameController : MonoBehaviour
 	{
-		public GameObject Player1;
-		public GameObject Player2;
+		[SerializeField]
+		private Card[] cardTypes;
 
-		private int currentPlayer;
+        [SerializeField]
+        private Player player1;
 
-		private void Awake()
+        [SerializeField]
+        private Player player2;
+
+        private int currentPlayer;
+
+		public int CurrentPlayer
 		{
-			currentPlayer = 1;
+			get
+			{
+				return this.currentPlayer;
+			}
 		}
 
+		public Card[] CardTypes
+		{
+			get
+			{
+				return this.cardTypes;
+			}
+
+			set
+			{
+				this.cardTypes = value;
+			}
+		}
+
+        public Player Player1
+        {
+            get
+            {
+                return this.player1;
+            }
+
+            set
+            {
+                this.player1 = value;
+            }
+        }
+
+        public Player Player2
+        {
+            get
+            {
+                return this.player2;
+            }
+
+            set
+            {
+                this.player2 = value;
+            }
+        }
+        
 		private void Start()
 		{
-			
-		}
+            this.currentPlayer = 1;
+            this.player1.Initialize(1);
+            this.player2.Initialize(2);
+        }
 
 		private void Update()
 		{

@@ -1,33 +1,32 @@
 ﻿namespace InatelCards
 {
-    using System.Collections;
+    using System;
     using System.Collections.Generic;
     using UnityEngine;
-
-    [RequireComponent(typeof(MeshRenderer), typeof(MeshCollider))]
+    
     public abstract class Card : MonoBehaviour
     {
-        public static Card CreateCard(ProfessorCards professor)
+		public CardMode CardMode { get; set; }
+
+		public Player Owner { get; set; }
+
+		public static Card CreateCard(ProfessorCards professor)
 		{
+			GameObject go;
+
 			switch (professor)
 			{
 				case ProfessorCards.Estevan:
-					return new Estevan();
+					go = new GameObject("Estevan", typeof(Estevan));
+					return go.GetComponentInChildren<Estevan>();
+
+				case ProfessorCards.Renzo:
+					go = new GameObject("Renzo", typeof(Renzo));
+					return go.GetComponentInChildren<Renzo>();
 
 				default:
-					throw new System.ArgumentOutOfRangeException("Unknown professor!");
+					throw new ArgumentOutOfRangeException("Unknown professor!");
 			}
 		}
-
-        void Start()
-        {
-            
-        }
-
-        
-        void Update()
-        {
-
-        }
     }
 }

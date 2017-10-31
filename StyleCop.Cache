@@ -7,7 +7,7 @@
     <timestamps>
       <styleCop>2017/10/21 00:49:53.011</styleCop>
       <settingsFile>2017/10/21 14:35:09.484</settingsFile>
-      <sourceFile>2017/10/21 15:07:12.039</sourceFile>
+      <sourceFile>2017/10/30 16:40:02.901</sourceFile>
       <parser>2017/10/21 00:49:53.011</parser>
       <StyleCop.CSharp.DocumentationRules>2017/10/21 00:49:53.011</StyleCop.CSharp.DocumentationRules>
       <StyleCop.CSharp.DocumentationRules.FilesHashCode>0</StyleCop.CSharp.DocumentationRules.FilesHashCode>
@@ -25,15 +25,37 @@
       <StyleCop.CSharp.SpacingRules.FilesHashCode>0</StyleCop.CSharp.SpacingRules.FilesHashCode>
     </timestamps>
     <violations>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SingleLineCommentsMustBeginWithSingleSpace" ruleCheckId="SA1005">
+        <context>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
+        <line>55</line>
+        <index>992</index>
+        <endIndex>1022</endIndex>
+        <startLine>55</startLine>
+        <startColumn>5</startColumn>
+        <endLine>55</endLine>
+        <endColumn>35</endColumn>
+        <warning>False</warning>
+      </violation>
+      <violation namespace="StyleCop.CSharp.SpacingRules" rule="SingleLineCommentsMustBeginWithSingleSpace" ruleCheckId="SA1005">
+        <context>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</context>
+        <line>56</line>
+        <index>1029</index>
+        <endIndex>1076</endIndex>
+        <startLine>56</startLine>
+        <startColumn>5</startColumn>
+        <endLine>56</endLine>
+        <endColumn>52</endColumn>
+        <warning>False</warning>
+      </violation>
       <violation namespace="StyleCop.CSharp.ReadabilityRules" rule="PrefixLocalCallsWithThis" ruleCheckId="SA1101">
-        <context>The call to Cards must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
-        <line>11</line>
-        <index>147</index>
-        <endIndex>151</endIndex>
-        <startLine>11</startLine>
-        <startColumn>4</startColumn>
-        <endLine>11</endLine>
-        <endColumn>8</endColumn>
+        <context>The call to owner must begin with the 'this.' prefix to indicate that the item is a member of the class.</context>
+        <line>81</line>
+        <index>1726</index>
+        <endIndex>1730</endIndex>
+        <startLine>81</startLine>
+        <startColumn>29</startColumn>
+        <endLine>81</endLine>
+        <endColumn>33</endColumn>
         <warning>False</warning>
       </violation>
     </violations>

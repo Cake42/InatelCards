@@ -6,8 +6,6 @@
     {
 		public const int DefaultHealthPoint = 100;
 
-		private Card otherCard;
-
 		public abstract int DefaultAttack { get; }
 
 		public abstract int DefaultDefense { get; }
@@ -18,12 +16,11 @@
 
 		public int HealthPoint { get; set; }
 
-		private void Update()
+		protected virtual void Awake()
 		{
-			if (Input.GetMouseButtonDown(0))
-			{
-
-			}
+			this.Attack = this.DefaultAttack;
+			this.Defense = this.DefaultDefense;
+			this.HealthPoint = Professor.DefaultHealthPoint;
 		}
 	}
 }

@@ -18,11 +18,11 @@
 			{
 				case ProfessorCards.Estevan:
 					go = new GameObject("Estevan", typeof(Estevan));
-					return go.GetComponentInChildren<Estevan>();
+					return go.GetComponent<Estevan>();
 
 				case ProfessorCards.Renzo:
 					go = new GameObject("Renzo", typeof(Renzo));
-					return go.GetComponentInChildren<Renzo>();
+					return go.GetComponent<Renzo>();
 
 				default:
 					throw new ArgumentOutOfRangeException("Unknown professor!");

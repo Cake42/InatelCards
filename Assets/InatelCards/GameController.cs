@@ -13,9 +13,9 @@
         [SerializeField]
         private Player player2;
 
-        private int currentPlayer;
+        private PlayerNumber currentPlayer;
 
-		public int CurrentPlayer
+		public PlayerNumber CurrentPlayer
 		{
 			get
 			{
@@ -64,14 +64,7 @@
         
 		private void Start()
 		{
-            this.currentPlayer = 1;
-            this.player1.Initialize(1);
-            this.player2.Initialize(2);
+            this.currentPlayer = PlayerNumber.Player1;
         }
-
-		private void Update()
-		{
-			
-		}
 	}
 }

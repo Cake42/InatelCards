@@ -14,6 +14,7 @@
 		{
 			if (!File.Exists(FileName))
 			{
+				File.Create(FileName).Dispose();
 				this.Serialize(new PlayerScore[]
 				{
 					new PlayerScore(0, "AlunoInatel"),
@@ -31,12 +32,11 @@
 			{
 				PlayerScore[] scores;
 
-				using (FileStream file = new FileStream(FileName, FileMode.Open))
+				using (Stream file = new FileStream(FileName, FileMode.Open, FileAccess.Read))
 				{
 					try
 					{
-						BinaryFormatter formatter = new BinaryFormatter();
-						scores = (PlayerScore[])formatter.Deserialize(file);
+						scores = (PlayerScore[])new BinaryFormatter().Deserialize(file);
 					}
 					catch (SerializationException e)
 					{
@@ -66,12 +66,11 @@
 
 		private void Serialize(PlayerScore[] scores)
 		{
-			using (FileStream file = new FileStream(FileName, FileMode.Open))
+			using (Stream file = new FileStream(FileName, FileMode.Open, FileAccess.Write))
 			{
 				try
 				{
-					BinaryFormatter formatter = new BinaryFormatter();
-					formatter.Serialize(file, scores);
+					new BinaryFormatter().Serialize(file, scores);
 				}
 				catch (SerializationException e)
 				{

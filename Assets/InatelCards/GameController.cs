@@ -4,9 +4,6 @@
 
 	public class GameController : MonoBehaviour
 	{
-		[SerializeField]
-		private Card[] cardTypes;
-
 		private PlayerNumber currentPlayer;
 
 		private bool changeTurn;
@@ -19,14 +16,6 @@
 
 		[SerializeField]
 		private Table table;
-
-		public Card[] CardTypes
-		{
-			get
-			{
-				return this.cardTypes;
-			}
-		}
 
 		public PlayerNumber CurrentPlayer
 		{
@@ -74,9 +63,12 @@
 			set { this.table = value; }
 		}
 
+		internal bool IsDisabled { get; set; }
+
 		internal void ChangeTurn()
 		{
 			this.changeTurn = true;
+			Camera.main.GetComponent<CameraController>().Next();
 		}
 
 		private void Awake()

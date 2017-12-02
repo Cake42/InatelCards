@@ -3,7 +3,7 @@
 	public enum ProfessorCards
 	{
 		Estevan,
-		////Rosanna,
+		Ynoguti,
 		Renzo
 	}
 }

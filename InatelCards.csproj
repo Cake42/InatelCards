@@ -221,20 +221,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\InatelCards\CameraController.cs" />
     <Compile Include="Assets\InatelCards\Card.cs" />
     <Compile Include="Assets\InatelCards\CardMode.cs" />
     <Compile Include="Assets\InatelCards\Estevan.cs" />
     <Compile Include="Assets\InatelCards\GameController.cs" />
+    <Compile Include="Assets\InatelCards\Guilherme.cs" />
     <Compile Include="Assets\InatelCards\Location.cs" />
+    <Compile Include="Assets\InatelCards\Marcelo.cs" />
     <Compile Include="Assets\InatelCards\Player.cs" />
     <Compile Include="Assets\InatelCards\PlayerNumber.cs" />
     <Compile Include="Assets\InatelCards\PlayerScore.cs" />
     <Compile Include="Assets\InatelCards\Professor.cs" />
     <Compile Include="Assets\InatelCards\ProfessorCards.cs" />
     <Compile Include="Assets\InatelCards\Renzo.cs" />
+    <Compile Include="Assets\InatelCards\Rosanna.cs" />
     <Compile Include="Assets\InatelCards\ScoreReaderWriter.cs" />
     <Compile Include="Assets\InatelCards\Table.cs" />
     <Compile Include="Assets\InatelCards\Utils.cs" />
+    <Compile Include="Assets\InatelCards\Ynoguti.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

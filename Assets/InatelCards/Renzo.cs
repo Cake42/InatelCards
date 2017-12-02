@@ -4,6 +4,8 @@
 
 	public class Renzo : Professor
 	{
+		private Sprite sprite;
+
 		public override int DefaultAttack
 		{
 			get { return 15; }
@@ -16,13 +18,13 @@
 
 		public override Sprite Sprite
 		{
-			get
-			{
-				return Sprite.Create(
-					Resources.Load<Texture2D>("Renzo"),
-					new Rect(0f, 0f, 100f, 200f),
-					new Vector2(0, 0));
-			}
+			get { return this.sprite; }
+		}
+
+		protected override void Awake()
+		{
+			base.Awake();
+			this.sprite = Card.Load("Renzo");
 		}
 	}
 }

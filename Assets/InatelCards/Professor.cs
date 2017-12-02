@@ -1,7 +1,5 @@
 ﻿namespace InatelCards
 {
-	using UnityEngine;
-
     public abstract class Professor : Card
     {
 		public const int DefaultHealthPoint = 100;
@@ -16,8 +14,9 @@
 
 		public int HealthPoint { get; set; }
 
-		protected virtual void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			this.Attack = this.DefaultAttack;
 			this.Defense = this.DefaultDefense;
 			this.HealthPoint = Professor.DefaultHealthPoint;

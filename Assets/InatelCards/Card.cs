@@ -1,62 +1,51 @@
 ﻿namespace InatelCards
 {
-    using System;
     using UnityEngine;
     
     public abstract class Card : MonoBehaviour
     {
+		private static Sprite backSprite;
+		
+		private static Card[] cardTypes;
+
 		public static Sprite BackSprite
+		{
+			get { return Card.backSprite; }
+		}
+
+		public static Card RandomCard
 		{
 			get
 			{
-				return Sprite.Create(
-					Resources.Load<Texture2D>("Back"),
-					new Rect(0f, 0f, 100f, 200f),
-					new Vector2(0, 0));
+				if (Card.cardTypes == null)
+				{
+					Card.cardTypes = new Card[]
+					{
+						Resources.Load<Estevan>("Prefabs/Estevan"),
+						Resources.Load<Guilherme>("Prefabs/Guilherme"),
+						Resources.Load<Marcelo>("Prefabs/Marcelo"),
+						Resources.Load<Renzo>("Prefabs/Renzo"),
+						Resources.Load<Rosanna>("Prefabs/Rosanna"),
+						Resources.Load<Ynoguti>("Prefabs/Ynoguti")
+					};
+				}
+
+				return MonoBehaviour.Instantiate(
+					Card.cardTypes[Random.Range(0, Card.cardTypes.Length)]);
 			}
 		}
 
 		public CardMode CardMode { get; set; }
 
-		public bool MovedToTable { get; set; }
-
-		public Player Owner { get; set; }
-
 		public abstract Sprite Sprite { get; }
 
-		public static Card CreateCard(ProfessorCards professor)
+		internal Location CardLocation { get; set; }
+
+		internal int Index { get; set; }
+
+		public void Hide()
 		{
-			GameObject go;
-
-			switch (professor)
-			{
-				case ProfessorCards.Estevan:
-					go = new GameObject("Estevan", typeof(Estevan));
-					return go.GetComponent<Estevan>();
-
-				case ProfessorCards.Renzo:
-					go = new GameObject("Renzo", typeof(Renzo));
-					return go.GetComponent<Renzo>();
-
-				default:
-					throw new ArgumentOutOfRangeException("Unknown professor!");
-			}
-		}
-
-		public void Kill(Player killer)
-		{
-			killer.Score += 100;
-			MonoBehaviour.Destroy(this.gameObject);
-		}
-
-		public void PlaySelect()
-		{
-			this.GetComponent<Animator>().SetTrigger("DoSelect");
-		}
-
-		public void PlayUnselect()
-		{
-			this.GetComponent<Animator>().SetTrigger("DoUnselect");
+			this.GetComponent<SpriteRenderer>().sprite = Card.BackSprite;
 		}
 
 		public void PlayMoveToTable()
@@ -64,14 +53,38 @@
 			this.GetComponent<Animator>().SetTrigger("DoMoveToTable");
 		}
 
-		public void Hide()
+		public void PlaySelect()
 		{
-			this.GetComponent<SpriteRenderer>().sprite = Card.BackSprite;
+			this.GetComponent<Animator>().SetTrigger("DoSelect");
+			this.GetComponent<SpriteRenderer>().sortingOrder = 20;
+		}
+
+		public void PlayUnselect()
+		{
+			this.GetComponent<Animator>().SetTrigger("DoUnselect");
+			this.GetComponent<SpriteRenderer>().sortingOrder = this.Index;
 		}
 
 		public void Unhide()
 		{
 			this.GetComponent<SpriteRenderer>().sprite = this.Sprite;
+		}
+
+		protected static Sprite Load(string name)
+		{
+			Texture2D texture = Resources.Load<Texture2D>(name);
+			return Sprite.Create(
+				texture,
+				new Rect(0, 0, texture.width, texture.height),
+				new Vector2(0, 0));
+		}
+
+		protected virtual void Awake()
+		{
+			if (Card.backSprite == null)
+			{
+				Card.backSprite = Card.Load("Back");
+			}
 		}
 	}
 }

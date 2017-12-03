@@ -123,7 +123,7 @@
 				
 				if (attack1 > attack2)
 				{
-					if (attack1 >= defense2)
+					if (attack1 > defense2)
 					{
 						this.winner = this.gameController.Player1;
 						this.loser = this.gameController.Player2;
@@ -136,7 +136,7 @@
 				}
 				else if (attack2 > attack1)
 				{
-					if (attack2 >= defense1)
+					if (attack2 > defense1)
 					{
 						this.winner = this.gameController.Player2;
 						this.loser = this.gameController.Player1;

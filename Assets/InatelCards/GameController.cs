@@ -3,6 +3,7 @@
 	using InatelCards.ScoreBoard;
 	using UnityEngine;
 	using UnityEngine.SceneManagement;
+	using UnityEngine.UI;
 
 	[DisallowMultipleComponent]
 	public class GameController : MonoBehaviour
@@ -21,6 +22,10 @@
 		private Table table;
 
 		private bool gameStarted;
+
+		private Text score1;
+
+		private Text score2;
 
 		public PlayerNumber CurrentPlayer
 		{
@@ -65,7 +70,11 @@
 		private void Awake()
 		{
             this.currentPlayer = PlayerNumber.None;
-        }
+			this.score1 = GameObject.Find("Score1").GetComponent<Text>();
+			this.score2 = GameObject.Find("Score2").GetComponent<Text>();
+			this.score1.text = MainMenu.MainMenu.Name1 + " - 0 pts";
+			this.score2.text = MainMenu.MainMenu.Name2 + " - 0 pts";
+		}
 
 		private void Start()
 		{
@@ -96,6 +105,9 @@
 
 				this.player1.HideCards();
 				this.player2.HideCards();
+
+				this.score1.text = MainMenu.MainMenu.Name1 + " - " + this.player1.Score + " pts";
+				this.score2.text = MainMenu.MainMenu.Name2 + " - " + this.player2.Score + " pts";
 
 				this.changeTurn = false;
 				Camera.main.GetComponent<CameraController>().Next();

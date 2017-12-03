@@ -2,93 +2,82 @@
 {
 	using UnityEngine;
 
+	[DisallowMultipleComponent]
 	public class CameraController : MonoBehaviour
 	{
-		#region Transform constants
+		private static readonly Vector3 CenterPosition = Vector3.back * 10;
 
-		private readonly Vector3 centerPosition = Vector3.back * 10;
+		private static readonly Vector3 CenterRotation = Vector3.zero;
 
-		private readonly Vector3 centerRotation = Vector3.zero;
+		private static readonly Vector3 LeftPosition = new Vector3(-30, 0, -10);
 
-		private readonly Vector3 leftPosition = new Vector3(-30, 0, -10);
+		private static readonly Vector3 LeftRotation = Vector3.forward * 270;
 
-		private readonly Vector3 leftRotation = Vector3.forward * 270;
+		private static readonly Vector3 RightPosition = new Vector3(30, 0, -10);
 
-		private readonly Vector3 rightPosition = new Vector3(30, 0, -10);
+		private static readonly Vector3 RightRotation = Vector3.forward * 90;
 
-		private readonly Vector3 rightRotation = Vector3.forward * 90;
-
-		#endregion Transform constants
-
-		private CameraState state;
-
-		private enum CameraState
-		{
-			Left,
-			Center,
-			Right
-		}
+		private PlayerNumber state;
 
 		/// <summary>
 		/// Moves the camera's transform to the proper place, when changing turn.
 		/// </summary>
 		internal void Next()
 		{
-			if (this.state == CameraState.Left)
+			if (this.state == PlayerNumber.Player1)
 			{
-				this.state = CameraState.Right;
+				this.state = PlayerNumber.Player2;
 			}
-			else if (this.state == CameraState.Right)
+			else if (this.state == PlayerNumber.Player2)
 			{
-				this.state = CameraState.Center;
+				this.state = PlayerNumber.None;
 			}
 			else
 			{
-				this.state = CameraState.Left;
+				this.state = PlayerNumber.Player1;
 			}
 		}
 
 		private void Awake()
 		{
-			this.state = CameraState.Left;
-			Camera.main.transform.position = this.leftPosition;
-			Camera.main.transform.eulerAngles = this.leftRotation;
+			this.state = PlayerNumber.None;
+			Camera.main.transform.position = CameraController.CenterPosition;
+			Camera.main.transform.eulerAngles = CameraController.CenterRotation;
 		}
 
 		private void LateUpdate()
 		{
-			if (this.state == CameraState.Left)
+			if (this.state == PlayerNumber.Player1)
 			{
 				Camera.main.transform.eulerAngles = Vector3.Slerp(
 					Camera.main.transform.eulerAngles,
-					this.leftRotation,
+					CameraController.LeftRotation,
 					Time.deltaTime);
 				Camera.main.transform.position = Vector3.Lerp(
 					Camera.main.transform.position,
-					this.leftPosition,
+					CameraController.LeftPosition,
 					Time.deltaTime);
-
 			}
-			else if (this.state == CameraState.Right)
+			else if (this.state == PlayerNumber.Player2)
 			{
 				Camera.main.transform.eulerAngles = Vector3.Slerp(
 					Camera.main.transform.eulerAngles,
-					this.rightRotation,
+					CameraController.RightRotation,
 					Time.deltaTime);
 				Camera.main.transform.position = Vector3.Lerp(
 					Camera.main.transform.position,
-					this.rightPosition,
+					CameraController.RightPosition,
 					Time.deltaTime);
 			}
 			else
 			{
 				Camera.main.transform.eulerAngles = Vector3.Slerp(
 					Camera.main.transform.eulerAngles,
-					this.centerRotation,
+					CameraController.CenterRotation,
 					Time.deltaTime);
 				Camera.main.transform.position = Vector3.Lerp(
 					Camera.main.transform.position,
-					this.centerPosition,
+					CameraController.CenterPosition,
 					Time.deltaTime);
 			}
 		}

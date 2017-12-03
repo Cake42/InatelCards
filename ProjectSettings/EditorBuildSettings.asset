@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MainMenu.unity
+    guid: 186e216e29f2d2c49b064377e3a7ed19
+  - enabled: 1
+    path: Assets/InatelCards.unity
+    guid: 6033f60dec50fb3409e8fefe7082dc45
+  - enabled: 1
+    path: Assets/ScoreBoard.unity
+    guid: 9a4a4831490a7e34aa81b6ce20acbcf9

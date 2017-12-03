@@ -13,6 +13,10 @@
 			get { return Card.backSprite; }
 		}
 
+		/// <summary>
+		/// Gets a randomly generated card, based on the professor's probability.
+		/// </summary>
+		/// <value>A randomly generated card.</value>
 		public static Card RandomCard
 		{
 			get
@@ -29,15 +33,28 @@
 						Resources.Load<Ynoguti>("Prefabs/Ynoguti")
 					};
 				}
-
-				return MonoBehaviour.Instantiate(
+				
+				Card card = MonoBehaviour.Instantiate(
 					Card.cardTypes[Random.Range(0, Card.cardTypes.Length)]);
+
+				int probability = Random.Range(0, 101);
+				if (100 - card.Probability <= probability)
+				{
+					return card;
+				}
+				else
+				{
+					card.Kill();
+					return Card.RandomCard;
+				}
 			}
 		}
 
 		public CardMode CardMode { get; set; }
 
 		public abstract Sprite Sprite { get; }
+
+		public abstract int Probability { get; }
 
 		internal Location CardLocation { get; set; }
 
@@ -48,9 +65,14 @@
 			this.GetComponent<SpriteRenderer>().sprite = Card.BackSprite;
 		}
 
-		public void PlayMoveToTable()
+		/*public void PlayMoveToTable()
 		{
 			this.GetComponent<Animator>().SetTrigger("DoMoveToTable");
+		}*/
+
+		public void Kill()
+		{
+			MonoBehaviour.Destroy(this.gameObject);
 		}
 
 		public void PlaySelect()

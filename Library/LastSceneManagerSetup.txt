@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/InatelCards/InatelCards.unity
+- path: Assets/InatelCards.unity
   isLoaded: 1
   isActive: 1

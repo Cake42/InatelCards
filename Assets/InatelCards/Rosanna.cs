@@ -21,6 +21,11 @@
 			get { return this.sprite; }
 		}
 
+		public override int Probability
+		{
+			get { return 40; }
+		}
+
 		protected override void Awake()
 		{
 			base.Awake();

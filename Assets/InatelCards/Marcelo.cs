@@ -8,17 +8,22 @@
 
 		public override int DefaultAttack
 		{
-			get { return 20; }
+			get { return 50; }
 		}
 
 		public override int DefaultDefense
 		{
-			get { return 30; }
+			get { return 40; }
 		}
 
 		public override Sprite Sprite
 		{
 			get { return this.sprite; }
+		}
+
+		public override int Probability
+		{
+			get { return 2; }
 		}
 
 		protected override void Awake()

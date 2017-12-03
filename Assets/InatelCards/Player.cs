@@ -3,6 +3,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
+	[DisallowMultipleComponent]
 	public class Player : MonoBehaviour
 	{
 		public const int DefaultCardQuantity = 6;
@@ -20,6 +21,8 @@
 
 		private Card previousCard;
 
+		private bool confirmTurn;
+
 		public int CardQuantity
 		{
 			get { return this.cards.Count; }
@@ -27,8 +30,15 @@
 
 		public Card CurrentCard
 		{
-			get { return this.cards[this.currentCardIndex]; }
-			set { this.cards[this.currentCardIndex] = value; }
+			get
+			{
+				return this.cards[Mathf.Clamp(this.currentCardIndex, 0, this.CardQuantity - 1)];
+			}
+
+			set
+			{
+				this.cards[Mathf.Clamp(this.currentCardIndex, 0, this.CardQuantity - 1)] = value;
+			}
 		}
 
 		public int CurrentCardIndex
@@ -77,21 +87,18 @@
 				card.CardLocation = Location.Deck;
 				this.cards.Add(card);
 			}
-			
-			this.SetPosition(!this.IsCurrentPlayer);
+
+			this.IsSuspended = false;
+			this.ResetPosition();
 		}
 
 		/// <summary>
 		/// Recalculates the position of all cards on the deck so that they are
-		/// placed in their correct position, and change the cards
-		/// <see cref="Sprite"/>, all accordingly to the <paramref name="main"/>
-		/// parameter.
+		/// placed in their correct positions.
 		/// </summary>
-		/// <param name="main">Indicates whether the cards should be on the
-		/// main deck (bottom deck) or secondary deck (top deck).</param>
-		internal void SetPosition(bool main)
+		internal void ResetPosition()
 		{
-			const float cardSpacing = 6;
+			const float CardSpacing = 5;
 			
 			for (int i = 0; i < this.cards.Count; i++)
 			{
@@ -102,21 +109,24 @@
 					card.Index = i;
 					card.GetComponent<SpriteRenderer>().sortingOrder = i;
 					card.transform.rotation = card.transform.parent.rotation;
-					card.transform.localPosition = new Vector3(
-							i * cardSpacing,
-							0);
-
-					if (main)
-					{
-						card.Unhide();
-						card.GetComponent<SpriteRenderer>().flipX = false;
-					}
-					else
-					{
-						card.Hide();
-						card.GetComponent<SpriteRenderer>().flipX = true;
-					}
+					card.transform.localPosition = new Vector3(i * CardSpacing, 0);
 				}
+			}
+		}
+
+		internal void HideCards()
+		{
+			foreach (Card card in this.cards)
+			{
+				card.Hide();
+			}
+		}
+
+		internal void UnhideCards()
+		{
+			foreach (Card card in this.cards)
+			{
+				card.Unhide();
 			}
 		}
 
@@ -137,6 +147,8 @@
 
 				this.cards.Add(card);
 			}
+
+			this.ResetPosition();
 		}
 
 		private void MoveToTable(int cardIndex)
@@ -152,9 +164,16 @@
 			{
 				this.CurrentCardIndex--;
 			}
-
-			this.CurrentCard.PlaySelect();
-			this.SetPosition(this.IsCurrentPlayer);
+			
+			this.ResetPosition();
+			if (this.IsCurrentPlayer)
+			{
+				this.UnhideCards();
+			}
+			else
+			{
+				this.HideCards();
+			}
 
 			this.gameController.Table.AddCard(this.playerNumber, card);
 		}
@@ -162,16 +181,6 @@
 		private void Start()
 		{
 			this.DrawCards();
-
-			if (this.playerNumber == PlayerNumber.Player1)
-			{
-				this.SetPosition(true);
-				this.CurrentCard.PlaySelect();
-			}
-			else
-			{
-				this.SetPosition(false);
-			}
 		}
 
 		private void Update()
@@ -181,14 +190,25 @@
 				return;
 			}
 
+			if (!this.confirmTurn)
+			{
+				if (Input.GetKeyDown(KeyCode.Return))
+				{
+					this.confirmTurn = true;
+					this.UnhideCards();
+					this.CurrentCard.PlaySelect();
+				}
+				
+				return;
+			}
+
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
 			{
 				this.previousCard = this.CurrentCard;
 				this.previousCard.PlayUnselect();
 
 				this.CurrentCardIndex--;
-				Card card = this.cards[this.CurrentCardIndex];
-				card.PlaySelect();
+				this.cards[this.CurrentCardIndex].PlaySelect();
 			}
 			else if (Input.GetKeyDown(KeyCode.RightArrow))
 			{
@@ -196,18 +216,22 @@
 				this.previousCard.PlayUnselect();
 
 				this.CurrentCardIndex++;
-				Card card = this.cards[this.CurrentCardIndex];
-				card.PlaySelect();
+				this.cards[this.CurrentCardIndex].PlaySelect();
 			}
             else if (Input.GetKeyDown(KeyCode.Return))
             {
-                this.MoveToTable(this.currentCardIndex);
+				this.MoveToTable(this.currentCardIndex);
 				this.movedToTable++;
 
 				if (this.movedToTable == 2)
 				{
 					this.movedToTable = 0;
 					this.gameController.ChangeTurn();
+					this.confirmTurn = false;
+				}
+				else
+				{
+					this.CurrentCard.PlaySelect();
 				}
 			}
 		}

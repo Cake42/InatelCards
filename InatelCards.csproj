@@ -228,17 +228,17 @@
     <Compile Include="Assets\InatelCards\GameController.cs" />
     <Compile Include="Assets\InatelCards\Guilherme.cs" />
     <Compile Include="Assets\InatelCards\Location.cs" />
+    <Compile Include="Assets\InatelCards\MainMenu\MainMenu.cs" />
     <Compile Include="Assets\InatelCards\Marcelo.cs" />
     <Compile Include="Assets\InatelCards\Player.cs" />
     <Compile Include="Assets\InatelCards\PlayerNumber.cs" />
-    <Compile Include="Assets\InatelCards\PlayerScore.cs" />
     <Compile Include="Assets\InatelCards\Professor.cs" />
-    <Compile Include="Assets\InatelCards\ProfessorCards.cs" />
     <Compile Include="Assets\InatelCards\Renzo.cs" />
     <Compile Include="Assets\InatelCards\Rosanna.cs" />
-    <Compile Include="Assets\InatelCards\ScoreReaderWriter.cs" />
+    <Compile Include="Assets\InatelCards\ScoreBoard\PlayerScore.cs" />
+    <Compile Include="Assets\InatelCards\ScoreBoard\ScoreBoard.cs" />
+    <Compile Include="Assets\InatelCards\ScoreBoard\ScoreReaderWriter.cs" />
     <Compile Include="Assets\InatelCards\Table.cs" />
-    <Compile Include="Assets\InatelCards\Utils.cs" />
     <Compile Include="Assets\InatelCards\Ynoguti.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,7 @@
 	[DisallowMultipleComponent]
 	public class Player : MonoBehaviour
 	{
-		public const int DefaultCardQuantity = 6;
+		public const int DefaultCardQuantity = 12;
 
 		private List<Card> cards;
 
@@ -98,7 +98,7 @@
 		/// </summary>
 		internal void ResetPosition()
 		{
-			const float CardSpacing = 5;
+			const float CardSpacing = 3.5f;
 			
 			for (int i = 0; i < this.cards.Count; i++)
 			{

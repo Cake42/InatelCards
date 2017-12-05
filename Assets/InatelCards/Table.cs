@@ -14,7 +14,7 @@
 
 		private Player winner;
 
-		private Player loser;
+		//private Player loser;
 
 		private bool suspend;
 
@@ -126,11 +126,11 @@
 					if (attack1 > defense2)
 					{
 						this.winner = this.gameController.Player1;
-						this.loser = this.gameController.Player2;
+						//this.loser = this.gameController.Player2;
 					}
 					else
 					{
-						this.loser = null;
+						//this.loser = null;
 						this.winner = null;
 					}
 				}
@@ -139,11 +139,11 @@
 					if (attack2 > defense1)
 					{
 						this.winner = this.gameController.Player2;
-						this.loser = this.gameController.Player1;
+						//this.loser = this.gameController.Player1;
 					}
 					else
 					{
-						this.loser = null;
+						//this.loser = null;
 						this.winner = null;
 					}
 				}
@@ -152,16 +152,16 @@
 					if (defense1 > defense2)
 					{
 						this.winner = this.gameController.Player1;
-						this.loser = this.gameController.Player2;
+						//this.loser = this.gameController.Player2;
 					}
 					else if (defense2 > defense1)
 					{
 						this.winner = this.gameController.Player2;
-						this.loser = this.gameController.Player1;
+						//this.loser = this.gameController.Player1;
 					}
 					else
 					{
-						this.loser = null;
+						//this.loser = null;
 						this.winner = null;
 					}
 				}
@@ -191,10 +191,17 @@
 				}*/
 
 				this.compare = false;
+
+				if (this.winner != null)
+				{
+					this.winner.Score += 100;
+				}
+
+				this.gameController.UpdateScore();
 			}
 			else if (this.suspend && Input.GetKeyDown(KeyCode.Return))
 			{
-				bool gameWon = false;
+				/*bool gameWon = false;
 
 				if (this.winner == null)
 				{
@@ -219,17 +226,25 @@
 						this.card1Player2,
 						this.card2Player2);
 					this.loser.ReturnCards();
-				}
+				}*/
+
+				this.card1Player1.Kill();
+				this.card2Player1.Kill();
+				this.card1Player2.Kill();
+				this.card2Player2.Kill();
+				this.gameController.Player1.ReturnCards();
+				this.gameController.Player2.ReturnCards();
 
 				this.suspend = false;
-				this.loser = null;
+				//this.loser = null;
 				this.winner = null;
 				this.card1Player1 = null;
 				this.card2Player1 = null;
 				this.card1Player2 = null;
 				this.card2Player2 = null;
 
-				if (gameWon)
+				if (this.gameController.Player1.CardQuantity == 0
+					|| this.gameController.Player2.CardQuantity == 0)
 				{
 					this.gameController.EndGame();
 				}

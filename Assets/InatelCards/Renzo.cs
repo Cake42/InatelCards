@@ -4,7 +4,7 @@
 
 	public class Renzo : Professor
 	{
-		private Sprite sprite;
+		private static Sprite sprite;
 
 		public override int DefaultAttack
 		{
@@ -18,7 +18,7 @@
 
 		public override Sprite Sprite
 		{
-			get { return this.sprite; }
+			get { return Renzo.sprite; }
 		}
 
 		public override int Probability
@@ -29,7 +29,11 @@
 		protected override void Awake()
 		{
 			base.Awake();
-			this.sprite = Card.Load("Renzo");
+
+			if (Renzo.sprite == null)
+			{
+				Renzo.sprite = Card.Load("Renzo");
+			}
 		}
 	}
 }

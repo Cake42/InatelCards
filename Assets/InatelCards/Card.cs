@@ -30,7 +30,14 @@
 						Resources.Load<Marcelo>("Prefabs/Marcelo"),
 						Resources.Load<Renzo>("Prefabs/Renzo"),
 						Resources.Load<Rosanna>("Prefabs/Rosanna"),
-						Resources.Load<Ynoguti>("Prefabs/Ynoguti")
+						Resources.Load<Ynoguti>("Prefabs/Ynoguti"),
+						Resources.Load<Dani>("Prefabs/Dani"),
+						Resources.Load<João>("Prefabs/João"),
+						Resources.Load<Felipe>("Prefabs/Felipe"),
+						Resources.Load<Karina>("Prefabs/Karina"),
+						Resources.Load<Navantino>("Prefabs/Navantino"),
+						Resources.Load<Luiz>("Prefabs/Luiz"),
+						Resources.Load<Wander>("Prefabs/Wander")
 					};
 				}
 				

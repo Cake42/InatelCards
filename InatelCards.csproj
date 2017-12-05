@@ -224,12 +224,18 @@
     <Compile Include="Assets\InatelCards\CameraController.cs" />
     <Compile Include="Assets\InatelCards\Card.cs" />
     <Compile Include="Assets\InatelCards\CardMode.cs" />
+    <Compile Include="Assets\InatelCards\Dani.cs" />
     <Compile Include="Assets\InatelCards\Estevan.cs" />
+    <Compile Include="Assets\InatelCards\Felipe.cs" />
     <Compile Include="Assets\InatelCards\GameController.cs" />
     <Compile Include="Assets\InatelCards\Guilherme.cs" />
+    <Compile Include="Assets\InatelCards\João.cs" />
+    <Compile Include="Assets\InatelCards\Karina.cs" />
     <Compile Include="Assets\InatelCards\Location.cs" />
+    <Compile Include="Assets\InatelCards\Luiz.cs" />
     <Compile Include="Assets\InatelCards\MainMenu\MainMenu.cs" />
     <Compile Include="Assets\InatelCards\Marcelo.cs" />
+    <Compile Include="Assets\InatelCards\Navantino.cs" />
     <Compile Include="Assets\InatelCards\Player.cs" />
     <Compile Include="Assets\InatelCards\PlayerNumber.cs" />
     <Compile Include="Assets\InatelCards\Professor.cs" />
@@ -239,6 +245,7 @@
     <Compile Include="Assets\InatelCards\ScoreBoard\ScoreBoard.cs" />
     <Compile Include="Assets\InatelCards\ScoreBoard\ScoreReaderWriter.cs" />
     <Compile Include="Assets\InatelCards\Table.cs" />
+    <Compile Include="Assets\InatelCards\Wander.cs" />
     <Compile Include="Assets\InatelCards\Ynoguti.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

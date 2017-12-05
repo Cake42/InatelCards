@@ -67,6 +67,12 @@
 			SceneManager.LoadScene("ScoreBoard");
 		}
 
+		internal void UpdateScore()
+		{
+			this.score1.text = MainMenu.MainMenu.Name1 + " - " + this.player1.Score + " pts";
+			this.score2.text = MainMenu.MainMenu.Name2 + " - " + this.player2.Score + " pts";
+		}
+
 		private void Awake()
 		{
             this.currentPlayer = PlayerNumber.None;
@@ -105,9 +111,6 @@
 
 				this.player1.HideCards();
 				this.player2.HideCards();
-
-				this.score1.text = MainMenu.MainMenu.Name1 + " - " + this.player1.Score + " pts";
-				this.score2.text = MainMenu.MainMenu.Name2 + " - " + this.player2.Score + " pts";
 
 				this.changeTurn = false;
 				Camera.main.GetComponent<CameraController>().Next();
